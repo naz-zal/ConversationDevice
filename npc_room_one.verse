@@ -12,7 +12,7 @@ using { /Fortnite.com/Animation/PlayAnimation }
 
 npc_room_one := class(npc_behavior):
 
-    # Refernce to the conversation device
+    # Reference to the conversation device
     @editable
     MyConvDev : conversation_device = conversation_device{}
 
@@ -27,6 +27,7 @@ npc_room_one := class(npc_behavior):
     OnBegin<override>()<suspends>:void=
         
 	# Subscribe to events that occur during conversation
+	# For more information on the conversation device, check: https://dev.epicgames.com/documentation/en-us/uefn/verse-api/fortnitedotcom/devices/conversation_device
         MyConvDev.OnConversationEvent.Subscribe(OnConversationEventResponse)
 
     OnConversationEventResponse(InAgent:agent, eventNumber : int):void=
