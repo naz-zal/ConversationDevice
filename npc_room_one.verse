@@ -1,14 +1,6 @@
 using { /Fortnite.com/AI }
-using { /Fortnite.com/Characters }
-using { /Verse.org }
-using { /Verse.org/Colors }
-using { /Verse.org/Random }
 using { /Fortnite.com/Devices }
 using { /Verse.org/Simulation }
-using { /UnrealEngine.com/Temporary/Diagnostics }
-using { /UnrealEngine.com/Temporary/SpatialMath }
-using { /Fortnite.com/Animation/PlayAnimation }
-
 
 npc_room_one := class(npc_behavior):
 
@@ -30,42 +22,23 @@ npc_room_one := class(npc_behavior):
 	# For more information on the conversation device, check: https://dev.epicgames.com/documentation/en-us/uefn/verse-api/fortnitedotcom/devices/conversation_device
         MyConvDev.OnConversationEvent.Subscribe(OnConversationEventResponse)
 
-    OnConversationEventResponse(InAgent:agent, eventNumber : int):void=
+    OnConversationEventResponse(InAgent: agent, eventNumber: int):void=
 
-	# event 1 is triggered when player makes a choice
+	# event 1 is triggered when player chooses science
         if (eventNumber = 1):
-            OpenA()
+	    Print("Science chosen")
+            OpenDoorOne(InAgent)
 
-	# event 2 is triggered when player makes the other choice
+	# event 2 is triggered when player chooses philosophy
         else if (eventNumber = 2):
-            OpenB()
+	    Print("Philosophy chosen")
+            OpenDoorTwo(InAgent)
 
-    OpenA():void=
+    OpenDoorOne(Agent: agent):void=
+	
+	DoorLockOne.Open(Agent)
 
-        if:
+    OpenDoorTwo(Agent: agent):void=
 
-            Agent := GetAgent[]
-            Character := Agent.GetFortCharacter[]
+	DoorLockTwo.Open(Agent)
 
-        then:
-
-            DoorLockOne.Open(Agent)
-
-        else:
-            
-            Print("Opening lock A didn't work!")
-
-    OpenB():void=
-
-        if:
-
-            Agent := GetAgent[]
-            Character := Agent.GetFortCharacter[]
-
-        then:
-
-            DoorLockTwo.Open(Agent)
-
-        else:
-            
-            Print("Opening lock B didn't work!")
